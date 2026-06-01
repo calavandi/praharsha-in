@@ -4,6 +4,7 @@ categories:
   - Epic Literature
 authors:
   - Hari Ravikumar
+  - Arjun Bharadwaj
 image: /assets/images/books/202511EMY.jpg
 year_of_publication: 2025
 languages:
