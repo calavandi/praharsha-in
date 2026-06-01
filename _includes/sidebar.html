@@ -1,0 +1,45 @@
+<!-- Mobile menu toggle -->
+<button class="mobile-menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-content">
+        <div class="logo-section">
+            <a href="{{ '/' | relative_url }}">
+                <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Praharsha" class="logo-image">
+            </a>
+        </div>
+        
+        <nav class="main-nav">
+            <a href="{{ '/' | relative_url }}" class="nav-link">Home</a>
+            <a href="{{ '/books/' | relative_url }}" class="nav-link">Books</a>
+            <a href="{{ '/contributors/' | relative_url }}" class="nav-link">Contributors</a>
+            <a href="{{ '/about/' | relative_url }}" class="nav-link">About</a>
+        </nav>
+        
+        <div class="sidebar-video">
+            <a href="https://www.youtube.com/live/FgQ7M39bkBk" target="_blank" rel="noopener" class="video-link">
+                <i class="fa-brands fa-youtube"></i> Watch on YouTube
+            </a>
+        </div>
+        
+        <div class="social-links">
+            <a href="{{ site.social.twitter }}" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="{{ site.social.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="{{ site.social.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; {{ 'now' | date: "%Y" }} Praharsha</p>
+        </div>
+    </div>
+</aside>

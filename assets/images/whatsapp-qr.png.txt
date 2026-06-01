@@ -1,0 +1,9 @@
+PLACEHOLDER - Replace this file with your WhatsApp QR code
+
+Filename: whatsapp-qr.png
+Recommended size: 400x400px
+Format: PNG
+
+Generate your QR code at:
+- https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://wa.me/YOUR_NUMBER
+- Or use WhatsApp Business app

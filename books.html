@@ -1,0 +1,107 @@
+---
+layout: page
+title: Books
+permalink: /books/
+---
+
+<div class="books-listing">
+    <div class="books-controls">
+        <div class="filter-controls">
+            <label for="genre-filter">Filter by Genre:</label>
+            <select id="genre-filter" onchange="filterBooks()">
+                <option value="all">All Genres</option>
+                {% assign all_genres = "" | split: "" %}
+                {% for book in site.books %}
+                    {% for genre in book.genres %}
+                        {% assign all_genres = all_genres | push: genre %}
+                    {% endfor %}
+                {% endfor %}
+                {% assign all_genres = all_genres | uniq | sort %}
+                {% for genre in all_genres %}
+                <option value="{{ genre | strip | downcase }}">{{ genre | strip }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="language-filter">Language:</label>
+            <select id="language-filter" onchange="filterBooks()">
+                <option value="all">All Languages</option>
+                {% assign all_languages = "" | split: "" %}
+                {% for book in site.books %}
+                    {% for lang in book.languages %}
+                        {% assign all_languages = all_languages | push: lang %}
+                    {% endfor %}
+                {% endfor %}
+                {% assign all_languages = all_languages | uniq | sort %}
+                {% for language in all_languages %}
+                <option value="{{ language | strip | downcase }}">{{ language | strip }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="sort-controls">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select" onchange="sortBooks(this.value)">
+                <option value="year" selected>Newest First</option>
+                <option value="year-old">Oldest First</option>
+                <option value="title">Title (A-Z)</option>
+                <option value="title-desc">Title (Z-A)</option>
+                <option value="author">Author (A-Z)</option>
+                <option value="cost-low">Cost (Low to High)</option>
+                <option value="cost-high">Cost (High to Low)</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="books-count">
+        <p id="books-count">Showing all books</p>
+    </div>
+    
+    <div class="books-grid" id="books-grid">
+        {% assign sorted_books = site.books | sort: "year_of_publication" | reverse %}
+        {% for book in sorted_books %}
+        <article class="book-card" 
+                 data-title="{{ book.title | downcase }}"
+                 data-author="{{ book.authors | join: ', ' | downcase }}"
+                 data-year="{{ book.year_of_publication | default: '0' }}"
+                 data-cost="{{ book.cost | default: '0' | remove: '₹' | remove: ',' }}"
+                 data-genres="{{ book.genres | join: ',' | downcase }}"
+                 data-languages="{{ book.languages | join: ',' | downcase }}">
+            {% if book.image %}
+            <div class="book-card-image">
+                <a href="{{ book.url | relative_url }}">
+                    <img src="{{ book.image | relative_url }}" alt="{{ book.title }}">
+                </a>
+            </div>
+            {% endif %}
+            <div class="book-card-content">
+                <h3 class="book-card-title">
+                    <a href="{{ book.url | relative_url }}">{{ book.title }}</a>
+                </h3>
+                {% if book.subtitle %}
+                <p class="book-card-subtitle">{{ book.subtitle }}</p>
+                {% endif %}
+                {% if book.authors %}
+                <p class="book-card-author">
+                    by 
+                    {% for author_name in book.authors %}
+                        {% assign author_page = site.authors | where: "title", author_name | first %}
+                        {% if author_page %}
+                            <a href="{{ author_page.url | relative_url }}">{{ author_name }}</a>
+                        {% else %}
+                            {{ author_name }}
+                        {% endif %}
+                        {% unless forloop.last %}, {% endunless %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+                {% if book.cost %}
+                <p class="book-card-price">{{ book.cost }}</p>
+                {% endif %}
+                <div class="book-card-excerpt">
+                    {{ book.excerpt | strip_html | truncatewords: 25 }}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>

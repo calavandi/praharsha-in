@@ -1,0 +1,63 @@
+---
+layout: default
+---
+
+<article class="author-detail">
+    <header class="author-header">
+        <h1 class="author-name">{{ page.title }}</h1>
+    </header>
+    
+    <div class="author-content">
+        {% if page.image %}
+        <div class="author-image">
+            <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+        </div>
+        {% endif %}
+        
+        <div class="author-bio">
+            {{ content }}
+            
+            {% if page.website %}
+            <p class="author-website">
+                <i class="fas fa-globe"></i> 
+                <a href="{{ page.website }}" target="_blank" rel="noopener">{{ page.website | remove: 'https://' | remove: 'http://' }}</a>
+            </p>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% assign author_books = site.books | where_exp: "book", "book.authors contains page.title" %}
+    {% if author_books.size > 0 %}
+    <div class="author-books-section">
+        <h2>Books by {{ page.title }}</h2>
+        <div class="books-grid">
+            {% for book in author_books %}
+            <article class="book-card">
+                {% if book.image %}
+                <div class="book-card-image">
+                    <a href="{{ book.url | relative_url }}">
+                        <img src="{{ book.image | relative_url }}" alt="{{ book.title }}">
+                    </a>
+                </div>
+                {% endif %}
+                <div class="book-card-content">
+                    <h3 class="book-card-title">
+                        <a href="{{ book.url | relative_url }}">{{ book.title }}</a>
+                    </h3>
+                    {% if book.subtitle %}
+                    <p class="book-card-subtitle">{{ book.subtitle }}</p>
+                    {% endif %}
+                    {% if book.cost %}
+                    <p class="book-card-price">{{ book.cost }}</p>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="back-link">
+        <a href="{{ '/contributors/' | relative_url }}">&larr; Back to Contributors</a>
+    </div>
+</article>

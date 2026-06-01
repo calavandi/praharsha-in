@@ -1,0 +1,30 @@
+---
+layout: page
+title: About Praharsha
+permalink: /about/
+---
+
+<div class="about-content">
+    <div class="about-text">
+        <p>Praharsha Publications was founded in 2021 by a group of literature enthusiasts with a combined experience of more than thirty years in publishing. Our mission is to bring out high quality content aligned to Sanatana-dharma presented in a readable and charming form. When we produce a book, we pay special attention to every detail and endeavour to make it as affordable as possible for the reader. Classical literature and classical arts are the primary focus areas of Praharsha.</p>
+    </div>
+    
+    <div class="founders-section">
+        <h2>Founders</h2>
+        <div class="founders-grid">
+            {% for author in site.authors %}
+            {% if author.is_founder %}
+            <div class="founder-card">
+                {% if author.image %}
+                <div class="founder-image">
+                    <img src="{{ author.image | relative_url }}" alt="{{ author.title }}">
+                </div>
+                {% endif %}
+                <h3 class="founder-name">{{ author.title }}</h3>
+                <p class="founder-bio">{{ author.content | strip_html | truncatewords: 40 }}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

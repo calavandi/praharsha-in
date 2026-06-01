@@ -1,0 +1,30 @@
+---
+layout: page
+title: Authors
+permalink: /authors/
+---
+
+<div class="authors-listing">
+    <div class="authors-grid">
+        {% for author in site.authors %}
+        <article class="author-card">
+            {% if author.image %}
+            <div class="author-card-image">
+                <a href="{{ author.url | relative_url }}">
+                    <img src="{{ author.image | relative_url }}" alt="{{ author.title }}">
+                </a>
+            </div>
+            {% endif %}
+            <div class="author-card-content">
+                <h3 class="author-card-name">
+                    <a href="{{ author.url | relative_url }}">{{ author.title }}</a>
+                </h3>
+                <div class="author-card-excerpt">
+                    {{ author.excerpt | strip_html | truncatewords: 40 }}
+                </div>
+                <a href="{{ author.url | relative_url }}" class="btn-small">Read More</a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>

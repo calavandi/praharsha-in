@@ -1,0 +1,53 @@
+.
+├── .dockerignore
+├── .gitignore
+├── CNAME
+├── COMMANDS_TO_RUN.md
+├── DEPLOYMENT_GUIDE.md
+├── DOCKER_GUIDE.md
+├── DOCKER_QUICKSTART.md
+├── DOCKER_SETUP_COMPLETE.md
+├── Dockerfile
+├── FILE_STRUCTURE.txt
+├── Gemfile
+├── Gemfile.lock
+├── HOW_IT_WORKS.md
+├── QUICKSTART.md
+├── README.md
+├── START_HERE.md
+├── _authors
+│   ├── anil-desai.md
+│   ├── kavita-nair.md
+│   ├── priya-sharma.md
+│   └── rajesh-kumar.md
+├── _books
+│   ├── echoes-of-tomorrow.md
+│   ├── homecoming.md
+│   ├── monsoon-memories.md
+│   ├── the-algorithm-of-desire.md
+│   ├── the-collectors-dilemma.md
+│   └── the-silent-mountains.md
+├── _config.yml
+├── _includes
+│   └── sidebar.html
+├── _layouts
+│   ├── author.html
+│   ├── book.html
+│   ├── default.html
+│   └── page.html
+├── assets
+│   ├── css
+│   ├── images
+│   └── js
+├── authors.html
+├── books.html
+├── contact.html
+├── docker-commands.sh
+├── docker-compose.yml
+├── index.html
+├── setup.sh
+├── start.bat
+├── start.sh
+└── stop.sh
+
+9 directories, 42 files

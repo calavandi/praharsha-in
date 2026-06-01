@@ -1,0 +1,37 @@
+---
+layout: page
+title: Contributors
+permalink: /contributors/
+---
+
+<div class="contributors-listing">
+    <div class="contributors-intro">
+        <p>Meet the talented authors who bring their unique voices and perspectives to Praharsha Publications.</p>
+    </div>
+    
+    <div class="authors-grid">
+        {% assign sorted_authors = site.authors | sort: "title" %}
+        {% for author in sorted_authors %}
+        {% unless author.is_founder %}
+        <article class="author-card">
+            {% if author.image %}
+            <div class="author-card-image">
+                <a href="{{ author.url | relative_url }}">
+                    <img src="{{ author.image | relative_url }}" alt="{{ author.title }}">
+                </a>
+            </div>
+            {% endif %}
+            <div class="author-card-content">
+                <h3 class="author-card-name">
+                    <a href="{{ author.url | relative_url }}">{{ author.title }}</a>
+                </h3>
+                <div class="author-card-excerpt">
+                    {{ author.excerpt | strip_html | truncatewords: 30 }}
+                </div>
+                <a href="{{ author.url | relative_url }}" class="btn-small">Read More</a>
+            </div>
+        </article>
+        {% endunless %}
+        {% endfor %}
+    </div>
+</div>

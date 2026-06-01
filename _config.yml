@@ -1,0 +1,68 @@
+title: Praharsha
+description: A distinguished publication house
+#url: "https://praharsha.in"
+repository: calavandi/praharsha-in
+baseurl: "/praharsha-in"
+
+# Collections
+collections:
+  books:
+    output: true
+    permalink: /books/:title/
+  authors:
+    output: true
+    permalink: /authors/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "books"
+    values:
+      layout: "book"
+  - scope:
+      path: ""
+      type: "authors"
+    values:
+      layout: "author"
+
+# Social links
+social:
+  twitter: "https://x.com/Praharshabooks"
+  facebook: "https://www.facebook.com/praharshapublications"
+  instagram: "https://www.instagram.com/praharshapublications/"
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - QUICKSTART.md
+  - DEPLOYMENT_GUIDE.md
+  - HOW_IT_WORKS.md
+  - START_HERE.md
+  - ARCHIVE_README.md
+  - DOCKER_GUIDE.md
+  - DOCKER_QUICKSTART.md
+  - DOCKER_SETUP_COMPLETE.md
+  - DOCKER_FIX.md
+  - COMMANDS_TO_RUN.md
+  - IMAGES_ADDED.md
+  - LOGO_FAVICON_FIXED.md
+  - MOBILE_MENU_DYNAMIC_CARDS.md
+  - DYNAMIC_FIELDS_GUIDE.md
+  - EDIT_BUY_INFO.md
+  - FILE_STRUCTURE.txt
+  - docker-compose.yml
+  - Dockerfile
+  - .dockerignore
+  - start.sh
+  - start.bat
+  - stop.sh
+  - setup.sh
+  - docker-commands.sh
