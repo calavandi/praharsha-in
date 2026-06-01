@@ -12,7 +12,6 @@ permalink: /contributors/
     <div class="authors-grid">
         {% assign sorted_authors = site.authors | sort: "title" %}
         {% for author in sorted_authors %}
-        {% unless author.is_founder %}
         <article class="author-card">
             {% if author.image %}
             <div class="author-card-image">
@@ -31,7 +30,6 @@ permalink: /contributors/
                 <a href="{{ author.url | relative_url }}" class="btn-small">Read More</a>
             </div>
         </article>
-        {% endunless %}
         {% endfor %}
     </div>
 </div>
