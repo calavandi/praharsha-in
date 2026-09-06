@@ -5,14 +5,19 @@ title: Home
 
 <section class="hero">
     <p class="hero-text">A publication house dedicated to high-quality content aligned with Sanatana-dharma, classical literature, and classical arts.</p>
-    <a href="{{ '/about/' | relative_url }}" class="hero-link">Learn more about Praharsha &rarr;</a>
+    <!-- <a href="{{ '/about/' | relative_url }}" class="hero-link">Learn more about Praharsha &rarr;</a> -->
+     <!-- <a href="#about" class="hero-link">Know more about us &rarr;</a> -->
+      <a href="#about" class="hero-link">
+    About Praharsha <span aria-hidden="true">↗</span>
+</a>
+
 </section>
 
 <section class="home-section">
     <h2 class="section-title">Featured Books</h2>
     <div class="books-grid">
         {% assign sorted_books = site.books | sort: "year_of_publication" | reverse %}
-        {% for book in sorted_books limit:4 %}
+        {% for book in sorted_books limit:3 %}
         <article class="book-card">
             {% if book.image %}
             <div class="book-card-image">
@@ -55,9 +60,9 @@ title: Home
 </section>
 
 <section class="home-section">
-    <h2 class="section-title">Our Authors</h2>
+    <h2 class="section-title">Our founders</h2>
     <div class="authors-grid">
-        {% for author in site.authors limit:4 %}
+        {% for author in site.authors %}
         <article class="author-card">
             {% if author.image %}
             <div class="author-card-image">
@@ -71,13 +76,21 @@ title: Home
                     <a href="{{ author.url | relative_url }}">{{ author.title }}</a>
                 </h3>
                 <div class="author-card-excerpt">
-                    {{ author.excerpt | strip_html | truncatewords: 15 }}
+                    <!-- {{ author.excerpt | strip_html | truncatewords: 15 | firstWord: bold}} -->
+                      {{ author.short_bio }}
                 </div>
             </div>
         </article>
         {% endfor %}
     </div>
-    <div class="view-all">
+        <div class="view-all">
         <a href="{{ '/contributors/' | relative_url }}" class="btn">Meet All Authors</a>
     </div>
+</section>
+    <section class="home-section" id="about">
+    <h2 class="section-title">About Praharsha</h2>
+    <div class="about-text">
+        <p>Praharsha Publications was founded in 2021 by a group of literature enthusiasts with a combined experience of more than thirty years in publishing. Our mission is to bring out high quality content aligned to Sanatana-dharma presented in a readable and charming form. When we produce a book, we pay special attention to every detail and endeavour to make it as affordable as possible for the reader. Classical literature and classical arts are the primary focus areas of Praharsha.</p>
+    </div>
+
 </section>

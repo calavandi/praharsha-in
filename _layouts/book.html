@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-
+<!-- 
 <article class="book-detail">
     <header class="book-header">
         <h1 class="book-title">{{ page.title }}</h1>
@@ -96,6 +96,127 @@ layout: default
                     <strong>Cost:</strong> <span class="cost-value">{{ page.cost }}</span>
                 </div>
                 {% endif %}
+            </div>
+            
+            <div class="book-full-description">
+                <h3>Description</h3>
+                {{ content }}
+            </div>
+            
+            <div class="buy-section">
+                <button class="btn buy-toggle-btn" onclick="toggleBuyInfo()">
+                    <i class="fas fa-shopping-cart"></i> How to Buy This Book
+                </button>
+                
+                <div class="buy-info" id="buy-info" style="display: none;">
+                    <h4>Order via WhatsApp</h4>
+                    <p>To order this book, scan the QR code below or click the link to message us directly on WhatsApp.</p>
+                    
+                    <div class="whatsapp-qr">
+                        <img src="{{ '/assets/images/whatsapp-qr.png' | relative_url }}" alt="WhatsApp QR Code" class="qr-code">
+                        <p class="qr-label">Scan to chat on WhatsApp</p>
+                        <a href="https://wa.me/919XXXXXXXXX?text=Hi!%20I%20want%20to%20buy%20{{ page.title | url_encode }}" class="whatsapp-link" target="_blank">
+                            <i class="fa-brands fa-whatsapp"></i> Message us on WhatsApp
+                        </a>
+                    </div>
+                    
+                    <div class="shipping-info">
+                        <h5>Shipping & Delivery</h5>
+                        <ul>
+                            <li>Free shipping across India for orders above &#8377;500</li>
+                            <li>Delivery within 5-7 business days</li>
+                            <li>Cash on Delivery available for select locations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="back-link">
+        <a href="{{ '/books/' | relative_url }}">&larr; Back to Books</a>
+    </div>
+</article> -->
+<article class="book-detail">
+    <header class="book-header">
+        <h1 class="book-title">{{ page.title }}</h1>
+        {% if page.subtitle %}
+        <p class="book-subtitle">{{ page.subtitle }}</p>
+        {% endif %}
+    </header>
+    
+    <div class="book-content">
+        {% if page.image %}
+        <div class="book-image">
+            <img src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+        </div>
+        {% endif %}
+        
+        <div class="book-description">
+            <div class="book-meta">
+                {% assign skip_fields = "title,subtitle,image,layout,date,url,path,id,content,excerpt,next,previous,draft,slug,ext,collection,relative_path,output,tags,dir,name,permalink,categories" | split: "," %}
+                {% assign people_fields = "authors,editors,translators" | split: "," %}
+                
+                {% for field_name in page %}
+                    {% unless skip_fields contains field_name %}
+                        {% assign field_value = page[field_name] %}
+                        {% if field_value and field_value != "" and field_value != empty %}
+                            <!-- {% assign label = field_name | replace: "_", " " | replace: "-", " " %}
+                            {% if field_name == "Isbn:" %}
+                                {% assign label = "ISBN" %}
+                            {% endif %}     -->
+                            {% assign label = field_name | replace: "_", " " | replace: "-", " " | capitalize %}
+                            {% if field_name == "isbn" %}
+                                {% assign label = "ISBN" %}
+                            {% endif %}
+                            {% if field_name == "year_of_publication" %}
+                                {% assign label = "Year of Publication" %}
+                            {% endif %}
+                            {% if people_fields contains field_name %}
+                                <div class="meta-item">
+                                    <strong>{{ label }}:</strong> 
+                                    {% if field_value.first %}
+                                        {% for person_name in field_value %}
+                                            {% assign person_page = site.authors | where: "title", person_name | first %}
+                                            {% if person_page %}
+                                                <a href="{{ person_page.url | relative_url }}">{{ person_name }}</a>
+                                            {% else %}
+                                                {{ person_name }}
+                                            {% endif %}
+                                            {% unless forloop.last %}, {% endunless %}
+                                        {% endfor %}
+                                    {% else %}
+                                        {% assign person_page = site.authors | where: "title", field_value | first %}
+                                        {% if person_page %}
+                                            <a href="{{ person_page.url | relative_url }}">{{ field_value }}</a>
+                                        {% else %}
+                                            {{ field_value }}
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            
+                            {% elsif field_name == "cost" %}
+                                <div class="meta-item book-cost">
+                                    <strong>{{ label }}:</strong> <span class="cost-value">{{ field_value }}</span>
+                                </div>
+                            
+                            {% else %}
+                                <div class="meta-item">
+                                    <strong>{{ label }}:</strong> 
+                                    {% if field_value == true %}
+                                        Yes
+                                    {% elsif field_value == false %}
+                                        No
+                                    {% elsif field_value.first %}
+                                        {{ field_value | join: ', ' }}
+                                    {% else %}
+                                        {{ field_value }}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endunless %}
+                {% endfor %}
             </div>
             
             <div class="book-full-description">
