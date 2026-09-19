@@ -320,6 +320,25 @@ a:hover {
     z-index: 1;
 }
 
+.author-card-name a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.author-card-image a {
+    position: relative;
+    z-index: 2;
+}
+
+.author-card .btn-small {
+    position: relative;
+    z-index: 2;
+}
+
 .book-card-author a {
     position: relative;
     z-index: 2;
@@ -641,6 +660,33 @@ a:hover {
 
 .page-content {
     max-width: 800px;
+}
+
+/* Books Search */
+.books-search {
+    margin-bottom: 20px;
+}
+
+.books-search input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--color-text);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.books-search input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(95, 111, 82, 0.1);
+}
+
+.books-search input::placeholder {
+    color: var(--color-text);
+    opacity: 0.4;
 }
 
 /* Books Controls */

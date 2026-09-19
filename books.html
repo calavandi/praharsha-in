@@ -5,6 +5,9 @@ permalink: /books/
 ---
 
 <div class="books-listing">
+     <div class="books-search">
+        <input type="text" id="book-search" placeholder="Search books by title, author, description..." oninput="filterBooks()">
+    </div>
     <div class="books-controls">
         <div class="filter-controls">
             <label for="genre-filter">Filter by Genre:</label>
@@ -36,6 +39,54 @@ permalink: /books/
                 <option value="{{ language | strip | downcase }}">{{ language | strip }}</option>
                 {% endfor %}
             </select>
+                        <label for="author-filter">Author:</label>
+            <select id="author-filter" onchange="filterBooks()">
+                <option value="all">All Authors</option>
+                {% assign all_authors = "" | split: "" %}
+                {% for book in site.books %}
+                    {% for author in book.authors %}
+                        {% assign all_authors = all_authors | push: author %}
+                    {% endfor %}
+                {% endfor %}
+                {% assign all_authors = all_authors | uniq | sort %}
+                {% for author in all_authors %}
+                <option value="{{ author | strip | downcase }}">{{ author | strip }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="translator-filter">Translator:</label>
+            <select id="translator-filter" onchange="filterBooks()">
+                <option value="all">All Translators</option>
+                {% assign all_translators = "" | split: "" %}
+                {% for book in site.books %}
+                    {% if book.translators %}
+                    {% for translator in book.translators %}
+                        {% assign all_translators = all_translators | push: translator %}
+                    {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                {% assign all_translators = all_translators | uniq | sort %}
+                {% for translator in all_translators %}
+                <option value="{{ translator | strip | downcase }}">{{ translator | strip }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="publisher-filter">Publisher:</label>
+            <select id="publisher-filter" onchange="filterBooks()">
+                <option value="all">All Publishers</option>
+                {% assign all_publishers = "" | split: "" %}
+                {% for book in site.books %}
+                    {% if book.publishers %}
+                    {% for publisher in book.publishers %}
+                        {% assign all_publishers = all_publishers | push: publisher %}
+                    {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                {% assign all_publishers = all_publishers | uniq | sort %}
+                {% for publisher in all_publishers %}
+                <option value="{{ publisher | strip | downcase }}">{{ publisher | strip }}</option>
+                {% endfor %}
+            </select>
         </div>
         
         <div class="sort-controls">
@@ -65,7 +116,11 @@ permalink: /books/
                  data-year="{{ book.year_of_publication | default: '0' }}"
                  data-cost="{{ book.cost | default: '0' | remove: '₹' | remove: ',' }}"
                  data-genres="{{ book.genres | join: ',' | downcase }}"
-                 data-languages="{{ book.languages | join: ',' | downcase }}">
+                 data-languages="{{ book.languages | join: ',' | downcase }}"
+                 data-subtitle="{{ book.subtitle | default: '' | downcase }}"
+                data-translator="{{ book.translators | join: ', ' | downcase }}"
+                data-publisher="{{ book.publishers | join: ', ' | downcase }}"
+                data-description="{{ book.content | strip_html | truncatewords: 50 | downcase | escape }}">
             {% if book.image %}
             <div class="book-card-image">
                 <a href="{{ book.url | relative_url }}">
